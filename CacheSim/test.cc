@@ -15,18 +15,25 @@ class test{
 };
 
 int main(void){
-  long long int i = stoll("0x1234AFE", NULL, 16);
-  cout << "The number is " << i;
-  vector<vector<vector<test > > > array;
-  array.resize(2);
-  for (int i = 0; i < 2; i++){
-    array[i].resize(2);
-    for (int j = 0; j < 2; j++){
-      array[i][j].resize(2);
-      //for (int k = 0; k < 10; k++){
-      //  array[i][j][k] = new test();
-      //}
-    }
+  vector<string> lines;
+  string tmp;
+  for(int i = 0; getline(cin, tmp); i++){
+    lines.resize(i+1);
+    lines[i] = tmp;
   }
-  cout << array[9][9][9].test1;
+  cout << lines[0] << endl;
+  //long long int i = stoll("0x1234AFE", NULL, 16);
+  //cout << "The number is " << i;
+  //vector<vector<vector<test > > > array;
+  //array.resize(2);
+  //for (int i = 0; i < 2; i++){
+  //  array[i].resize(2);
+  //  for (int j = 0; j < 2; j++){
+  //    array[i][j].resize(2);
+  //    //for (int k = 0; k < 10; k++){
+  //    //  array[i][j][k] = new test();
+  //    //}
+  //  }
+  //}
+  //cout << array[9][9][9].test1;
 }

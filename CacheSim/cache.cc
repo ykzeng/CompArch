@@ -159,18 +159,29 @@ int main(int argc, char **argv){
   //a[4][4] = 1;
   //cout << a[0][0] << " " << a[4][4];
   //param processing
+  //new: read by cin
+  vector<string> traceVector;
+  string tmpLine;
+  for(int i = 0; getline(cin, tmpLine); i++){
+    traceVector.resize(i+1);
+    traceVector[i] = tmpLine;
+  }
   int nk = atoi(argv[1]);
   int assoc = atoi(argv[2]);
   int blocksize = atoi(argv[3]);
   char repl = argv[4][0];
-  char* fileName = argv[5];
+  //obsolete read by file
+  //char* fileName = argv[5];
+
   //cout << nk << "\n";
   //cout << blocksize << "\n";
   //cout << (nk / blocksize) << "\n";
   Cache *cache = new Cache(nk, assoc, blocksize, repl);
-  string trace = readTrace(fileName);
-  vector<string> traceVector;
-  split(trace, '\n', traceVector);
+  //obsolete: read by file
+  //string trace = readTrace(fileName);
+  //vector<string> traceVector;
+  //split(trace, '\n', traceVector);
+
   //test if get file input as vector string
   //cout << traceVector[0] << endl;
   int total = 0, hit = 0, miss = 0;
