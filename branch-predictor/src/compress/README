@@ -1,0 +1,27 @@
+This directory contains the source code to the compression engine used to
+pre-process the CBP-2 traces.  Before the CBP-2 traces were compressed with
+bzip2, they were pre-processed with this code that uses prediction to remove
+redundancy from the traces.  For instance, without this pre-processing,
+the un-bzip2'ed version of the 164.gzip trace is 164 MB, compared with 18
+MB after applying this pre-processing step.
+
+In this directory, the program 'ct' (for 'C'ompress 'T'races) reads a gzip
+or bzip2 compressed file named on the command line and either applies
+the pre-processing (with the '-c' option) or reverses it to produce the
+original file (with the '-d' option).  To recover the original uncompressed
+trace for a CBP-2 trace, say 164.gzip, you would type this:
+
+ct -d gzip.trace.bz2 > gzip.trace
+
+The format of the original traces is documented in the trace.cc file
+in the src/ directory.  That file is derived from the trace.cc in this
+directory which is less documented but contains more features e.g. the
+compression engine.  To pre-process and compress a file that has been put
+into this original un-pre-processed format, you would type this:
+
+ct -c foo.trace | gzip > foo.trace.gz
+
+This step will print annoying output giving statistics about the quality
+of the compression in the pre-processing step.
+
+Problems with this code?  Use the Source, Luke.

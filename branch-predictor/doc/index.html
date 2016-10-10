@@ -1,0 +1,140 @@
+<html>
+<title> Infrastructure for Branch Prediction Competition </title>
+<body>
+<h2>Infrastructure for Branch Prediction Competition</h2>
+
+<b>Update:</b> This update to the infrastructure corrects a very small
+mistake in the traces and adds undocumented source code for the <a
+href="src/compress">compression engine</a> used to pre-process the traces.
+
+This is the infrastructure for the branch prediction competition.  There are
+three directories:
+	<ul>
+
+	<li> <a href="../src/"><tt>src</tt></a>.  This directory contains
+	C++ code for reading traces and driving the branch predictor code.
+	The file <a href="../src/my_predictor.h"><tt>my_predictor.h</tt></a>
+	is distributed with a simple example branch predictor.
+	Modify it to implement your predictor.	The <a
+	href="../src/Makefile"><tt>Makefile</tt></a> in this directory
+	will build a program called <tt>predict</tt> that will read a trace
+	file and print the number of mispredictions per 1000 instructions
+	on the standard output.
+
+	<li> <a href="../traces/"><tt>traces</tt></a>.  This directory contains
+	the distributed traces in directories named for benchmarks.
+
+	<li> <a href="../doc"><tt>doc</tt></a>.	This directory contains the
+	documentation including this file.
+
+	</ul>
+
+The <tt>csh</tt> script <a href="../run"><tt>run</tt></a> runs
+the <tt>predict</tt> program on traces in a directory.  Compile the
+<tt>predict</tt> program by changing to the <tt>src</tt> directory and
+typing <tt>make</tt>.  Then run the program on all the traces by changing
+to the top-level <tt>cbp2</tt> directory and typing <tt>run traces</tt>.
+
+<h3>Writing Your Branch Predictor Simulator</h3>
+Write your code in <a href="../src/my_predictor.h"><tt>my_predictor.h</tt></a>,
+replacing the simple gshare predictor that comes with this infrastructure.
+<p>
+The code in <tt>my_predictor.h</tt> defines two classes:
+	<ul>
+	<li> <tt>my_update</tt>.  This class is subclassed
+	from <tt>branch_update</tt> which is defined in <a
+	href="../src/predictor.h"><tt>predictor.h</tt></a>.  Your branch
+	predictor will return a pointer to <tt>branch_update</tt> when it
+	makes a prediction.  The <tt>direction_prediction()</tt> method in
+	this object should return <tt>true</tt> to predict that a branch
+	is taken, or <tt>false</tt> to predict that a branch is not taken.
+	When the driver code updates the branch predictor with the correct
+	outcome, the same pointer will be sent to your update code.  You can
+	expand your <tt>my_update</tt> class to include state you want
+	to refer to between calls to the prediction code.  For example,
+	the distributed <tt>my_update</tt> class stores the index into
+	the gshare table.
+
+	<li> <tt>my_predictor</tt>.  This class is subclassed
+	from the abstract class <tt>branch_predictor</tt> defined
+	in <a href="../src/predictor.h"><tt>predictor.h</tt></a>.
+	Classes subclassing from <tt>branch_predictor</tt> must define a
+	<tt>branch_update</tt> method with the following signature: 
+
+	<p>
+	<tt>virtual branch_update *predict (branch_info &); </tt> 
+	<p>
+
+	The driver program will call your <tt>predict</tt> method
+	for every branch trace, giving information from the trace
+	in a <tt>branch_info</tt> struct that is defined in <a
+	href="../src/branch.h"><tt>branch.h</tt></a>.  This struct
+	contains fields for the branch address, the x86 branch opcode for
+	a conditional branch, and a set of flags giving information on
+	whether a branch is e.g. a return, a call, a conditional branch,
+	etc.  The return value from <tt>predict</tt> should be an object
+	of (sub)class <tt>branch_update</tt> that gives the direction
+	prediction for a conditional branch.  
+	<p>
+	In addition to <tt>predict</tt>, you may define a method with
+	the following signature in your <tt>my_predictor</tt> class:
+
+	<p>
+	<tt>virtual void update (branch_update *, bool, unsigned int);</tt>
+	</p>
+
+	The driver program will call your <tt>update</tt> method (if any) to
+	give you a chance to update your predictor's state.  The parameters
+	are the <tt>branch_update</tt> pointer your <tt>predict</tt> method
+	returned, a <tt>bool</tt> that is <tt>false</tt> if a conditional
+	branch was not taken, <tt>true</tt> otherwise, and an unsigned
+	integer target address of the branch.
+
+	<p>
+
+	<b>Note:</b> The driver program only reports mispredictions
+	for conditional branches, but it calls the branch predictor
+	<tt>predict</tt> and <tt>update</tt> methods on every branch.
+	That's because you might want to use the information in a the
+	stream of all branches, not just conditional branches, to help
+	you predict conditional branches.  You are not required to try to
+	predict these non-conditional branches.
+
+	</ul>
+
+<h3>The Traces</h3>
+Each of the distributed trace files represents the branches encountered
+during the execution of 100 million instructions from the corresponding
+benchmark.  The traces include branches executed during the execution of
+benchmark code, library code, and system activity such as page faults.
+After the traces are generated, they are compressed with a crazy scheme
+I came up with one day when I was procrastinating from doing "real" work.
+Then they are compressed with <tt>bzip2</tt>.  The compression scheme is
+lossless; the traces sent to your predictor are bit-for-bit identical to
+the traces collected from the running benchmarks.
+
+<h3>System Requirements</h3>
+This infrastructure has been tested on x86 hardware running Fedora Core 4 and
+Debian 3.1 operating systems as well as the Cygwin environment on Microsoft
+Windows XP, SPARC hardware running SunOS 5.8, and PowerPC hardware running
+MacOS X.  The code should compile with no modifications with g++ >= 2.95.2.
+The program requires about 8MB plus whatever your branch predictor requires.
+On a Pentium D 2.8 GHz system the <tt>run</tt> script with the unmodified
+<tt>my_predictor.h</tt> takes about one minute run.
+<p>
+This infrastructure uses a few commands that are present on
+most Unix systems.  If the pathnames for <tt>bzip2</tt> and/or
+<tt>gzip</tt> on your system are different from those in <a
+href="../src/trace.h"><tt>trace.h</tt></a> then please customize them.
+<p>
+<h3>Disclaimer and Feedback</h3>
+This is a preliminary version of the infrastructure that has been subjected
+to testing by several graduate students.  I do not claim that it is free of
+bugs.  "Use the Source, Luke."  I welcome your comments.  Please send them
+to: <a href="mailto:djimenez@cs.rutgers.edu">djimenez@cs.rutgers.edu</a>.
+
+<p>
+This page was written by <a href="http://www.cs.rutgers.edu/~djimenez">Daniel
+A. Jim&eacute;nez</a>.
+</body>
+</html>
