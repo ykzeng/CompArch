@@ -1,5 +1,5 @@
 // predict.cc
-// This file contains the main function.  The program accepts a single 
+// This file contains the main function.  The program accepts a single
 // parameter: the name of a trace file.  It drives the branch predictor
 // simulation by reading the trace file and feeding the traces one at a time
 // to the branch predictor.
@@ -13,6 +13,8 @@
 #include "trace.h"
 #include "predictor.h"
 #include "my_predictor.h"
+#include "perceptron_predictor.h"
+#include "path_based_predictor.h"
 
 int main (int argc, char *argv[]) {
 
@@ -33,7 +35,7 @@ int main (int argc, char *argv[]) {
 
 	// some statistics to keep, currently just for conditional branches
 
-	long long int 
+	long long int
 		tmiss = 0, 	// number of target mispredictions
 		dmiss = 0; 	// number of direction mispredictions
 
