@@ -30,7 +30,10 @@ int main (int argc, char *argv[]) {
 
 	// initialize competitor's branch prediction code
 
-	branch_predictor *p = new my_predictor ();
+        //using original predictor
+	//branch_predictor *p = new my_predictor ();
+	//using path based predictor
+        branch_predictor *p = new path_perceptron_predictor ();
 
 	// some statistics to keep, currently just for conditional branches
 

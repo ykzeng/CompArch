@@ -88,9 +88,11 @@ class path_perceptron_predictor : public branch_predictor {
       bool prediction;
       bi = b;
       //change_possible
-      i = bi.address % n;
+      i = bi.address % N;
       //shift new addr into history addr array
-      shift_int(sv, H_LEN, i);
+      shift_int(sv, (H_LEN + 1), i);
+      //TODO
+      //use memcpy to expedite
       for (j = 0; j <= H_LEN; j++){
         u.v[j] = sv[j];
         u.h[j] = sg[j];
@@ -111,7 +113,7 @@ class path_perceptron_predictor : public branch_predictor {
       sr[0] = 0;
 
       //shift new speculative into s history
-      shift_bool(sg, H_LEN, prediction);
+      shift_bool(sg, (H_LEN + 1), prediction);
 
       u.i = i;
       u.y = y;
@@ -164,8 +166,8 @@ class path_perceptron_predictor : public branch_predictor {
       r[0] = 0;
 
       //shift actual branch result into non-speculative g
-      shift_bool(g, H_LEN, taken);
-      shift_int(v, H_LEN, i);
+      shift_bool(g, (H_LEN + 1), taken);
+      shift_int(v, (H_LEN + 1), i);
 
       // recover from misprediction, if any
       if (taken != u->direction_prediction()){
@@ -217,7 +219,7 @@ class path_perceptron_predictor : public branch_predictor {
     //into the fisrt(0) position of the array
     void shift_int(int array[], int length, int number){
       int j = 0;
-      for (j = length - 1; j > 0; j++){
+      for (j = length - 1; j > 0; j--){
         array[j] = array[j - 1];
       }
       array[0] = number;
@@ -225,7 +227,7 @@ class path_perceptron_predictor : public branch_predictor {
 
     void shift_bool(bool array[], int length, int new_bool){
       int j = 0;
-      for (j = length - 1; j > 0; j++){
+      for (j = length - 1; j > 0; j--){
         array[j] = array[j - 1];
       }
       array[0] = new_bool;
