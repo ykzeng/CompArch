@@ -14,7 +14,7 @@ set trace_list = `find $1 -name '*.trace.*' | sort`
 set sum = 0
 set n = 0
 foreach i ( $trace_list )
-	printf "%-40s\t" $i 
+	printf "%-40s\t" $i
 	set mpki = `./src/predict $i | tail -1 | sed -e '/MPKI/s///'`
 	printf "%0.3f\n" $mpki
 	set sum = `printf "$sum\n$mpki\n+\np\n" | dc`
