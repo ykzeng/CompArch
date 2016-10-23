@@ -5,8 +5,7 @@
 // for the CBP-2 contest; it is just an example.
 #define H_LEN  37
 #define N 2048
-#define TABLE_BITS	15
-#define THETA (2.14 * (H_LEN + 1) + 20.58)
+#define THETA (int)(2.14 * (H_LEN + 1) + 20.58)
 #define TAKEN true
 #define NOT_TAKEN false
 
@@ -25,7 +24,7 @@ class path_perceptron_update : public branch_update {
     path_perceptron_update(){
       //init(H_LEN);
       memset(v, 0, sizeof(v));
-      memset(h, 0, sizeof(h));
+      memset(h, NOT_TAKEN, sizeof(h));
     }
     //path_perceptron_update(int h_length){
     //  init(h_length);
@@ -68,16 +67,16 @@ class path_perceptron_predictor : public branch_predictor {
 
     path_perceptron_predictor (void) {
       //init all arrays
-      memset(g, true, (sizeof(g)));
-      memset(sg, true, (sizeof(sg)));
+      memset(g, NOT_TAKEN, (sizeof(g)));
+      memset(sg, NOT_TAKEN, (sizeof(sg)));
       memset(w, 0, (sizeof(w)));
       memset(sr, 0, (sizeof(sr)));
       memset(r, 0, (sizeof(r)));
       memset(v, 0, (sizeof(v)));
       memset(sv, 0, (sizeof(sv)));
 
-      this->max_weight = 255;
-      this->min_weight = -255;
+      this->max_weight = 127;
+      this->min_weight = -128;
     }
 
     branch_update *predict (branch_info & b) {
