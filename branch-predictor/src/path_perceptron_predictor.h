@@ -226,9 +226,9 @@ class path_perceptron_predictor : public branch_predictor {
 
     void shift_bool(bool array[], int length, int new_bool){
       int j = 0;
-      for (j = length - 1; j > 0; j--){
+      for (j = length - 1; j > 1; j--){
         array[j] = array[j - 1];
       }
-      array[0] = new_bool;
+      array[1] = new_bool;
     }
 };
