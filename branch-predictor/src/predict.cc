@@ -13,7 +13,6 @@
 #include "trace.h"
 #include "predictor.h"
 #include "my_predictor.h"
-#include "path_perceptron_predictor.h"
 
 int main (int argc, char *argv[]) {
 
@@ -30,10 +29,7 @@ int main (int argc, char *argv[]) {
 
 	// initialize competitor's branch prediction code
 
-        //using original predictor
-	//branch_predictor *p = new my_predictor ();
-	//using path based predictor
-        branch_predictor *p = new path_perceptron_predictor ();
+	branch_predictor *p = new my_predictor ();
 
 	// some statistics to keep, currently just for conditional branches
 
