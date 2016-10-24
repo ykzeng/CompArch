@@ -99,10 +99,12 @@ class my_predictor : public branch_predictor {
       shift_short(sv, (H_LEN + 1), i);
       //TODO
       //use memcpy to expedite
-      for (j = 0; j <= H_LEN; j++){
-        u.v[j] = sv[j];
-        u.h[j] = sg[j];
-      }
+      //for (j = 0; j <= H_LEN; j++){
+      //  u.v[j] = sv[j];
+      //  u.h[j] = sg[j];
+      //}
+      memcpy(u.v, sv, sizeof(sv));
+      memcpy(u.h, sg, sizeof(sg));
 
       y = w[i][0] + sr[H_LEN];
 
@@ -178,11 +180,14 @@ class my_predictor : public branch_predictor {
 
       // recover from misprediction, if any
       if (taken != u->direction_prediction()){
-        for (j = 0; j <= H_LEN; j++){
-          sr[j] = r[j];
-          sg[j] = g[j];
-          sv[j] = v[j];
-        }
+        //for (j = 0; j <= H_LEN; j++){
+        //  sr[j] = r[j];
+        //  sg[j] = g[j];
+        //  sv[j] = v[j];
+        //}
+        memcpy(sr, r, sizeof(r));
+        memcpy(sg, g, sizeof(g));
+        memcpy(sv, v, sizeof(v));
       }
 
       // perceptron learning rule
@@ -225,18 +230,27 @@ class my_predictor : public branch_predictor {
     //both shift functions are designed to shift the new value
     //into the fisrt(0) position of the array
     void shift_short(short array[], int length, short number){
-      int j = 0;
-      for (j = length - 1; j > 0; j--){
-        array[j] = array[j - 1];
-      }
+      //obsolete: use memcpy instead
+      //int j = 0;
+      //for (j = length - 1; j > 0; j--){
+      //  array[j] = array[j - 1];
+      //}
+      short tmp_array[H_LEN + 1] = {0};
+      memcpy(tmp_array, array, (sizeof(short) * (H_LEN + 1)));
+
+      memcpy((array + 1), tmp_array, (sizeof(short) * H_LEN));
       array[0] = number;
     }
 
-    void shift_bool(bool array[], int length, int new_bool){
-      int j = 0;
-      for (j = length - 1; j > 1; j--){
-        array[j] = array[j - 1];
-      }
+    void shift_bool(bool array[], int length, bool new_bool){
+      //int j = 0;
+      //for (j = length - 1; j > 1; j--){
+      //  array[j] = array[j - 1];
+      //}
+      bool tmp_array[H_LEN + 1] = {0};
+      memcpy(tmp_array, array, (sizeof(bool) * (H_LEN + 1)));
+
+      memcpy((array + 2), (tmp_array + 1), (sizeof(bool) * (H_LEN - 1)));
       array[1] = new_bool;
     }
 };
