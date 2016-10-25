@@ -4,8 +4,8 @@
 // Note that this predictor doesn't use the whole 8 kilobytes available
 // for the CBP-2 contest; it is just an example.
 #define H_LEN  32 //original 37
-#define N 256 //original 2048, 256 for requirements
-#define THETA (int)(1.93 * (H_LEN) + 14)//(int)(2.14 * (H_LEN + 1) + 20.58)
+#define N 256 //original 2048
+#define THETA (int)(2.14 * (H_LEN + 1) + 20.58)
 #define TAKEN true
 #define NOT_TAKEN false
 #define MAX_WEIGHT 127
