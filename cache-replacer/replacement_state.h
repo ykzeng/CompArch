@@ -1,6 +1,6 @@
 #ifndef REPL_STATE_H
 #define REPL_STATE_H
- 
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 //                                                                            //
@@ -25,11 +25,14 @@
 using namespace std;
 
 // Replacement Policies Supported
-typedef enum 
+typedef enum
 {
     CRC_REPL_LRU        = 0,
     CRC_REPL_RANDOM     = 1,
-    CRC_REPL_CONTESTANT = 2
+    CRC_REPL_CONTESTANT = 2,
+    CRC_REPL_NRU        = 3,
+    CRC_REPL_HP_RRIP    = 4,
+    CRC_REPL_FP_RRIP    = 5
 } ReplacemntPolicy;
 
 // Replacement State Per Cache Line
@@ -68,23 +71,25 @@ public:
 
     void   UpdateReplacementState( UINT32 setIndex, INT32 updateWayID );
 
-    void   SetReplacementPolicy( UINT32 _pol ) { replPolicy = _pol; } 
-    void   IncrementTimer() { mytimer++; } 
+    void   SetReplacementPolicy( UINT32 _pol ) { replPolicy = _pol; }
+    void   IncrementTimer() { mytimer++; }
 
-    void   UpdateReplacementState( UINT32 setIndex, INT32 updateWayID, const LINE_STATE *currLine, 
+    void   UpdateReplacementState( UINT32 setIndex, INT32 updateWayID, const LINE_STATE *currLine,
                                    UINT32 tid, Addr_t PC, UINT32 accessType, bool cacheHit );
 
     ~CACHE_REPLACEMENT_STATE(void);
 
   private:
-    
+
     void   InitReplacementState();
     INT32  Get_Random_Victim( UINT32 setIndex );
 
     INT32  Get_LRU_Victim( UINT32 setIndex );
     INT32  Get_My_Victim( UINT32 setIndex );
+    INT32  Get_NRU_Victim( UINT32 setIndex );
     void   UpdateLRU( UINT32 setIndex, INT32 updateWayID );
     void   UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID );
+    void   UpdateNRU( UINT32 setIndex, INT32 updateWayID );
 };
 
 #endif

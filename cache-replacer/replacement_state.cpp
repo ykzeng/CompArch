@@ -66,7 +66,7 @@ ostream & CACHE_REPLACEMENT_STATE::PrintStats(ostream &out)
     out<<"=========================================================="<<endl;
 
     // CONTESTANTS:  Insert your statistics printing here
-    
+
     return out;
 
 }
@@ -89,20 +89,32 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
     assert(repl);
 
     // Create the state for the sets
-    for(UINT32 setIndex=0; setIndex<numsets; setIndex++) 
+    for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
     {
         repl[ setIndex ]  = new LINE_REPLACEMENT_STATE[ assoc ];
 
-        for(UINT32 way=0; way<assoc; way++) 
+        for(UINT32 way=0; way<assoc; way++)
         {
             // initialize stack position (for true LRU)
             repl[ setIndex ][ way ].LRUstackposition = way;
         }
     }
 
-    if (replPolicy != CRC_REPL_CONTESTANT) return;
+    if (replPolicy == CRC_REPL_NRU);
+      // TODO init NRU variables
+
+
+    //else if (replPolicy == CRC_REPL_HP_RRIP)
+      // TODO init Hit Promotion RRIP variables
+    //else if (replPolicy == CRC_REPL_FP_RRIP)
+      // TODO init Frequency Promotion RRIP variables
+    //else if (replPolicy == CRC_REPL_CONTESTANT)
+
+    else
+      return;
 
     // Contestants:  ADD INITIALIZATION FOR YOUR HARDWARE HERE
+    // TODO variables initialization
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +126,7 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
 ////////////////////////////////////////////////////////////////////////////////
 INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, const LINE_STATE *vicSet, UINT32 assoc, Addr_t PC, Addr_t paddr, UINT32 accessType ) {
     // If no invalid lines, then replace based on replacement policy
-    if( replPolicy == CRC_REPL_LRU ) 
+    if( replPolicy == CRC_REPL_LRU )
     {
         return Get_LRU_Victim( setIndex );
     }
@@ -144,14 +156,14 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
 // whether the line was a cachehit or not (cacheHit=true implies hit)         //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
-void CACHE_REPLACEMENT_STATE::UpdateReplacementState( 
-    UINT32 setIndex, INT32 updateWayID, const LINE_STATE *currLine, 
+void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
+    UINT32 setIndex, INT32 updateWayID, const LINE_STATE *currLine,
     UINT32 tid, Addr_t PC, UINT32 accessType, bool cacheHit )
 {
 	//fprintf (stderr, "ain't I a stinker? %lld\n", get_cycle_count ());
 	//fflush (stderr);
     // What replacement policy?
-    if( replPolicy == CRC_REPL_LRU ) 
+    if( replPolicy == CRC_REPL_LRU )
     {
         UpdateLRU( setIndex, updateWayID );
     }
@@ -209,7 +221,7 @@ INT32 CACHE_REPLACEMENT_STATE::Get_LRU_Victim( UINT32 setIndex )
 INT32 CACHE_REPLACEMENT_STATE::Get_Random_Victim( UINT32 setIndex )
 {
     INT32 way = (rand() % assoc);
-    
+
     return way;
 }
 
@@ -240,12 +252,30 @@ void CACHE_REPLACEMENT_STATE::UpdateLRU( UINT32 setIndex, INT32 updateWayID )
 }
 
 INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
-	// return first way always
-	return 0;
+  // TODO control the victim selection policy
+  if (replPolicy == CRC_REPL_NRU)
+    return Get_NRU_Victim(setIndex);
+  // default return value is 0
+  return 0;
+}
+
+INT32 CACHE_REPLACEMENT_STATE::Get_NRU_Victim( UINT32 setIndex ) {
+  // TODO return the victim block of NRU policy
+
+
+  return 0;
 }
 
 void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID ) {
-	// do nothing
+  // do nothing
+  // TODO control the update policy
+  if (replPolicy == CRC_REPL_NRU)
+    UpdateNRU(setIndex, updateWayID);
+}
+
+void CACHE_REPLACEMENT_STATE::UpdateNRU( UINT32 setIndex, INT32 updateWayID ) {
+  // do nothing
+  // TODO update using NRU policy
 }
 
 CACHE_REPLACEMENT_STATE::~CACHE_REPLACEMENT_STATE (void) {
