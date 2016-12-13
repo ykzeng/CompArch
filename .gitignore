@@ -28,5 +28,9 @@
 *.out
 *.app
 
-#
+# ignore trace files
+*.gz
 /branch-predictor/traces
+
+# ignore swp files created by vim
+*.swp
