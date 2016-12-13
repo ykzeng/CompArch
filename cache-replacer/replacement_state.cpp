@@ -100,8 +100,17 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
         }
     }
 
-    if (replPolicy == CRC_REPL_NRU);
+    if (replPolicy == CRC_REPL_NRU){
       // TODO init NRU variables
+      for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
+      {
+          for(UINT32 way=0; way<assoc; way++)
+          {
+              // initialize stack position (for true LRU)
+              repl[ setIndex ][ way ].nru_bit = 1;
+          }
+      }
+    }
 
 
     //else if (replPolicy == CRC_REPL_HP_RRIP)
@@ -133,6 +142,11 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
     else if( replPolicy == CRC_REPL_RANDOM )
     {
         return Get_Random_Victim( setIndex );
+    }
+    // TODO control the victim selection policy
+    else if (replPolicy == CRC_REPL_NRU)
+    {
+        return Get_NRU_Victim(setIndex);
     }
     else if( replPolicy == CRC_REPL_CONTESTANT )
     {
@@ -171,11 +185,17 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
     {
         // Random replacement requires no replacement state update
     }
+    // TODO control the update policy
+    else if (replPolicy == CRC_REPL_NRU)
+    {
+        UpdateNRU(setIndex, updateWayID, cacheHit);
+    }
     else if( replPolicy == CRC_REPL_CONTESTANT )
     {
         // Contestants:  ADD YOUR UPDATE REPLACEMENT STATE FUNCTION HERE
         // Feel free to use any of the input parameters to make
         // updates to your replacement policy
+        UpdateMyPolicy(setIndex, updateWayID);
     }
 }
 
@@ -211,6 +231,39 @@ INT32 CACHE_REPLACEMENT_STATE::Get_LRU_Victim( UINT32 setIndex )
 	// return lru way
 
 	return lruWay;
+}
+
+INT32 CACHE_REPLACEMENT_STATE::Get_NRU_Victim( UINT32 setIndex ) {
+  // TODO return the victim block of NRU policy
+  UINT32 blockIndex = assoc;
+  LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
+  // Search for victim whose nru bit is 1 and was accessed the earliest
+  // i.e., nru_bit = 1, nru_position is the smallest
+  for(UINT32 way=0; way<assoc; way++) {
+  	if (replSet[way].nru_bit) {
+                // I currently think all the block nru position will not change
+                // just using the block index as nru position seems suffice
+                blockIndex = way;
+                break;
+  	}
+  }
+  // if found nru_bit = 1
+  if (blockIndex < assoc){
+    //set nru bit and replace it
+    replSet[blockIndex].nru_bit = 0;
+    return blockIndex;
+  }
+  else{
+    // consider here as replacement operation
+    replSet[0].nru_bit = 0;
+    for (UINT32 way=1; way<assoc; way++) {
+      replSet[way].nru_bit = 1;
+    }
+    return 0;
+    // guess in this case we have to return the earliest
+    // notice we should return the nru_position = 0, not the first line
+    //return 0;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -251,31 +304,23 @@ void CACHE_REPLACEMENT_STATE::UpdateLRU( UINT32 setIndex, INT32 updateWayID )
 	repl[ setIndex ][ updateWayID ].LRUstackposition = 0;
 }
 
-INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
-  // TODO control the victim selection policy
-  if (replPolicy == CRC_REPL_NRU)
-    return Get_NRU_Victim(setIndex);
-  // default return value is 0
-  return 0;
+void CACHE_REPLACEMENT_STATE::UpdateNRU( UINT32 setIndex, INT32 updateWayID,
+    bool cacheHit ) {
+  // do nothing
+  // TODO update using NRU policy
+  // we only do this when cache hit, since the miss case we have already dealed
+  // when selecting victim block
+  if (cacheHit)
+    repl[setIndex][updateWayID].nru_bit = 0;
 }
 
-INT32 CACHE_REPLACEMENT_STATE::Get_NRU_Victim( UINT32 setIndex ) {
-  // TODO return the victim block of NRU policy
-
-
+INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
+  // default return value is 0
   return 0;
 }
 
 void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID ) {
   // do nothing
-  // TODO control the update policy
-  if (replPolicy == CRC_REPL_NRU)
-    UpdateNRU(setIndex, updateWayID);
-}
-
-void CACHE_REPLACEMENT_STATE::UpdateNRU( UINT32 setIndex, INT32 updateWayID ) {
-  // do nothing
-  // TODO update using NRU policy
 }
 
 CACHE_REPLACEMENT_STATE::~CACHE_REPLACEMENT_STATE (void) {
