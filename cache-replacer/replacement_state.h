@@ -89,9 +89,11 @@ public:
     INT32  Get_LRU_Victim( UINT32 setIndex );
     INT32  Get_My_Victim( UINT32 setIndex );
     INT32  Get_NRU_Victim( UINT32 setIndex );
+    INT32  Get_HPRRIP_Victim( UINT32 setIndex );
     void   UpdateLRU( UINT32 setIndex, INT32 updateWayID );
     void   UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID );
     void   UpdateNRU( UINT32 setIndex, INT32 updateWayID, bool cacheHit );
+    void   UpdateHPRRIP( UINT32 setIndex, INT32 updateWayID, bool cacheHit );
 };
 
 #endif

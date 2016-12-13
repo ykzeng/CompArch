@@ -153,6 +153,16 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
         // Contestants:  ADD YOUR VICTIM SELECTION FUNCTION HERE
 	return Get_My_Victim (setIndex);
     }
+    else if ( replPolicy == CRC_REPL_HP_RRIP )
+    {
+        return Get_HPRRIP_Victim(setIndex);
+    }
+    }
+    else if ( replPolicy == CRC_REPL_FP_RRIP )
+    {
+        return Get_FPRRIP_Victim(setIndex);
+    }
+    }
 
     // We should never here here
 
@@ -190,12 +200,20 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
     {
         UpdateNRU(setIndex, updateWayID, cacheHit);
     }
-    else if( replPolicy == CRC_REPL_CONTESTANT )
+    else if ( replPolicy == CRC_REPL_CONTESTANT )
     {
         // Contestants:  ADD YOUR UPDATE REPLACEMENT STATE FUNCTION HERE
         // Feel free to use any of the input parameters to make
         // updates to your replacement policy
         UpdateMyPolicy(setIndex, updateWayID);
+    }
+    else if ( replPolicy == CRC_REPL_HP_RRIP )
+    {
+        UpdateHPRRIP(setIndex, updateWayID, cacheHit);
+    }
+    else if ( replPolicy == CRC_REPL_FP_RRIP )
+    {
+        UpdateFPRRIP(setIndex, updateWayID, cacheHit);
     }
 }
 
