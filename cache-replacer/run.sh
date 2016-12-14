@@ -29,3 +29,19 @@ export DAN_POLICY=3
 #./efectiu traces/482.sphinx3-417B.trace.gz
 #./efectiu traces/400.perlbench-50B.trace.gz
 ./efectiu traces/401.bzip2-226B.trace.gz
+
+echo "=========================================================="
+echo "=======================HP RRIP Results===================="
+echo "=========================================================="
+export DAN_POLICY=4
+#./efectiu traces/482.sphinx3-417B.trace.gz
+#./efectiu traces/400.perlbench-50B.trace.gz
+./efectiu traces/401.bzip2-226B.trace.gz
+
+echo "=========================================================="
+echo "=======================FP RRIP Results===================="
+echo "=========================================================="
+export DAN_POLICY=5
+#./efectiu traces/482.sphinx3-417B.trace.gz
+#./efectiu traces/400.perlbench-50B.trace.gz
+./efectiu traces/401.bzip2-226B.trace.gz

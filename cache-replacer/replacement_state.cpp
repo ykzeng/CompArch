@@ -111,7 +111,8 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
           }
       }
     }
-    else if (replPolicy == CRC_REPL_HP_RRIP){
+    else if (replPolicy == CRC_REPL_HP_RRIP
+        || replPolicy == CRC_REPL_FP_RRIP){
       // TODO init Hit Promotion RRIP variables
       for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
       {
@@ -161,13 +162,10 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
         // Contestants:  ADD YOUR VICTIM SELECTION FUNCTION HERE
 	return Get_My_Victim (setIndex);
     }
-    else if ( replPolicy == CRC_REPL_HP_RRIP )
+    else if ( replPolicy == CRC_REPL_HP_RRIP
+        || replPolicy == CRC_REPL_FP_RRIP)
     {
-        return Get_HPRRIP_Victim(setIndex);
-    }
-    else if ( replPolicy == CRC_REPL_FP_RRIP )
-    {
-        return Get_FPRRIP_Victim(setIndex);
+        return Get_RRIP_Victim(setIndex);
     }
 
     // We should never here here
@@ -256,39 +254,7 @@ INT32 CACHE_REPLACEMENT_STATE::Get_LRU_Victim( UINT32 setIndex )
 	return lruWay;
 }
 
-INT32 CACHE_REPLACEMENT_STATE::Get_FPRRIP_Victim( UINT32 setIndex ) {
-  // TODO return the victim block of FP RRIP policy
-  UINT32 blockIndex = assoc;
-  LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
-  // Search for victim whose RRPV is MAX_RRPV - 1 and was accessed the earliest
-  // i.e., rrpv = MAX_RRPV - 1, index is the smallest
-  for (UINT32 i = 0; i < MAX_RRPV; i++){
-    for(UINT32 way=0; way<assoc; way++) {
-    	if (replSet[way].rrpv == MAX_RRPV) {
-                  blockIndex = way;
-                  break;
-    	}
-    }
-    // TODO here we can simply find the max rrpv and increment all with the diff
-    // from the max one to MAX_RRPV
-    // if found
-    if (blockIndex < assoc){
-      //set rrpv and replace it
-      replSet[blockIndex].rrpv = MAX_RRPV - 2;
-      return blockIndex;
-    }
-    // if not found, increment all rrpv
-    else{
-      for(UINT32 way=0; way<assoc; way++) {
-        replSet[way].rrpv ++;
-      }
-    }
-  }
-  //hopefully we don't do this
-  return -1;
-}
-
-INT32 CACHE_REPLACEMENT_STATE::Get_HPRRIP_Victim( UINT32 setIndex ) {
+INT32 CACHE_REPLACEMENT_STATE::Get_RRIP_Victim( UINT32 setIndex ) {
   // TODO return the victim block of HP RRIP policy
   UINT32 blockIndex = assoc;
   LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
@@ -317,6 +283,7 @@ INT32 CACHE_REPLACEMENT_STATE::Get_HPRRIP_Victim( UINT32 setIndex ) {
     }
   }
   //hopefully we don't do this
+  assert(0);
   return -1;
 }
 
@@ -410,8 +377,10 @@ void CACHE_REPLACEMENT_STATE::UpdateFPRRIP( UINT32 setIndex, INT32 updateWayID,
     bool cacheHit ) {
   // we only do this when cache hit, since the miss case we have already dealed
   // when selecting victim block
-  if (cacheHit)
-    repl[setIndex][updateWayID].rrpv = 0;
+  if (cacheHit){
+    if (repl[setIndex][updateWayID].rrpv > 0)
+      repl[setIndex][updateWayID].rrpv--;
+  }
 }
 
 INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
