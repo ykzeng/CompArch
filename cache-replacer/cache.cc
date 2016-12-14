@@ -106,7 +106,7 @@ bool cache_access (cache *c, unsigned long long int address, unsigned long long 
 		printf ("op is %d!\n", op); fflush (stdout);
 		assert (0);
 	}
-	
+
 	// tag match?
 
 	for (i=0; i<assoc; i++) {
@@ -158,7 +158,7 @@ bool cache_access (cache *c, unsigned long long int address, unsigned long long 
 
 		if (set_valid) i = (random_counter++) % assoc; // replace
 		check_writeback (i);
-		if (at == ACCESS_STORE || at == ACCESS_WRITEBACK) 
+		if (at == ACCESS_STORE || at == ACCESS_WRITEBACK)
 			v[i].dirty = true;
 		else
 			v[i].dirty = false;
@@ -172,7 +172,7 @@ bool cache_access (cache *c, unsigned long long int address, unsigned long long 
 		if (set_valid) i = assoc - 1; // replace LRU block
 		check_writeback (i);
 		if (i != 0) move_to_mru (v, i);
-		if (at == ACCESS_STORE || at == ACCESS_WRITEBACK) 
+		if (at == ACCESS_STORE || at == ACCESS_WRITEBACK)
 			v[0].dirty = true;
 		else
 			v[0].dirty = false;
@@ -204,13 +204,14 @@ bool cache_access (cache *c, unsigned long long int address, unsigned long long 
 
 		if (i != -1) {
 			check_writeback (i);
-			if (at == ACCESS_STORE || at == ACCESS_WRITEBACK) 
+			if (at == ACCESS_STORE || at == ACCESS_WRITEBACK)
 				v[i].dirty = true;
 			else
 				v[i].dirty = false;
 			v[i].tag = tag;
 			v[i].valid = 1;
-			assert (i >= 0 && i < assoc);
+			assert (i >= 0);
+                        assert (i < assoc);
 #ifdef DANSHIP
 			c->repl->UpdateReplacementState (set, i, &ls, core, pc, at, false, address);
 #else

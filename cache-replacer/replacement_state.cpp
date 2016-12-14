@@ -256,35 +256,39 @@ INT32 CACHE_REPLACEMENT_STATE::Get_LRU_Victim( UINT32 setIndex )
 
 INT32 CACHE_REPLACEMENT_STATE::Get_RRIP_Victim( UINT32 setIndex ) {
   // TODO return the victim block of HP RRIP policy
-  UINT32 blockIndex = assoc;
+  UINT32 blockIndex = assoc, lruLineRrpv = 0;
   LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
   // Search for victim whose RRPV is MAX_RRPV - 1 and was accessed the earliest
   // i.e., rrpv = MAX_RRPV - 1, index is the smallest
-  for (UINT32 i = 0; i < MAX_RRPV; i++){
-    for(UINT32 way=0; way<assoc; way++) {
-    	if (replSet[way].rrpv == MAX_RRPV) {
-                  blockIndex = way;
-                  break;
-    	}
-    }
-    // TODO here we can simply find the max rrpv and increment all with the diff
-    // from the max one to MAX_RRPV
-    // if found
-    if (blockIndex < assoc){
-      //set rrpv and replace it
-      replSet[blockIndex].rrpv = MAX_RRPV - 2;
-      return blockIndex;
-    }
-    // if not found, increment all rrpv
-    else{
-      for(UINT32 way=0; way<assoc; way++) {
-        replSet[way].rrpv ++;
+  for(UINT32 way=0; way<assoc; way++) {
+  	if (replSet[way].rrpv == MAX_RRPV) {
+                //blockIndex = way;
+                replSet[way].rrpv = MAX_RRPV - 2;
+                return way;
+  	}
+      if (replSet[way].rrpv > lruLineRrpv){
+        lruLineRrpv = replSet[way].rrpv;
+        blockIndex = way;
       }
-    }
+  }
+  // TODO here we can simply find the max rrpv and increment all with the diff
+  // from the max one to MAX_RRPV
+  // if found
+  INT32 diff = MAX_RRPV - lruLineRrpv;
+  for (UINT32 way = 0; way < assoc; way ++){
+    replSet[way].rrpv += diff;
+  }
+  // here we are sure that all lines are 0 rrpv upon the insertion
+  if (blockIndex == assoc)
+    return 0;
+  else{
+    // use the line with max rrpv
+    replSet[blockIndex].rrpv = MAX_RRPV - 2;
+    return blockIndex;
   }
   //hopefully we don't do this
-  assert(0);
-  return -1;
+  //assert(0);
+  //return -1;
 }
 
 INT32 CACHE_REPLACEMENT_STATE::Get_NRU_Victim( UINT32 setIndex ) {
