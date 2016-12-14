@@ -31,7 +31,8 @@ using namespace std;
 ** below to develop their cache replacement ideas.
 **
 */
-
+UINT32 CACHE_REPLACEMENT_STATE::M = 4;
+UINT32 CACHE_REPLACEMENT_STATE::MAX_RRPV = pow(2, M) - 1;
 
 ////////////////////////////////////////////////////////////////////////////////
 // The replacement state constructor:                                         //
@@ -92,7 +93,7 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
     for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
     {
         repl[ setIndex ]  = new LINE_REPLACEMENT_STATE[ assoc ];
-
+        // TODO decouple LRU init from here
         for(UINT32 way=0; way<assoc; way++)
         {
             // initialize stack position (for true LRU)
@@ -101,21 +102,29 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
     }
 
     if (replPolicy == CRC_REPL_NRU){
-      // TODO init NRU variables
       for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
       {
           for(UINT32 way=0; way<assoc; way++)
           {
-              // initialize stack position (for true LRU)
+              // initialize NRU bits
               repl[ setIndex ][ way ].nru_bit = 1;
           }
       }
     }
-
-
-    //else if (replPolicy == CRC_REPL_HP_RRIP)
+    else if (replPolicy == CRC_REPL_HP_RRIP){
       // TODO init Hit Promotion RRIP variables
-    //else if (replPolicy == CRC_REPL_FP_RRIP)
+      for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
+      {
+          for(UINT32 way=0; way<assoc; way++)
+          {
+              // initialize HP per block RRPV
+              repl[ setIndex ][ way ].rrpv = MAX_RRPV - 1;
+          }
+      }
+
+    }
+
+      //else if (replPolicy == CRC_REPL_FP_RRIP)
       // TODO init Frequency Promotion RRIP variables
     //else if (replPolicy == CRC_REPL_CONTESTANT)
 
@@ -143,7 +152,6 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
     {
         return Get_Random_Victim( setIndex );
     }
-    // TODO control the victim selection policy
     else if (replPolicy == CRC_REPL_NRU)
     {
         return Get_NRU_Victim(setIndex);
@@ -157,11 +165,9 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
     {
         return Get_HPRRIP_Victim(setIndex);
     }
-    }
     else if ( replPolicy == CRC_REPL_FP_RRIP )
     {
         return Get_FPRRIP_Victim(setIndex);
-    }
     }
 
     // We should never here here
@@ -195,7 +201,6 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
     {
         // Random replacement requires no replacement state update
     }
-    // TODO control the update policy
     else if (replPolicy == CRC_REPL_NRU)
     {
         UpdateNRU(setIndex, updateWayID, cacheHit);
@@ -251,8 +256,71 @@ INT32 CACHE_REPLACEMENT_STATE::Get_LRU_Victim( UINT32 setIndex )
 	return lruWay;
 }
 
+INT32 CACHE_REPLACEMENT_STATE::Get_FPRRIP_Victim( UINT32 setIndex ) {
+  // TODO return the victim block of FP RRIP policy
+  UINT32 blockIndex = assoc;
+  LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
+  // Search for victim whose RRPV is MAX_RRPV - 1 and was accessed the earliest
+  // i.e., rrpv = MAX_RRPV - 1, index is the smallest
+  for (UINT32 i = 0; i < MAX_RRPV; i++){
+    for(UINT32 way=0; way<assoc; way++) {
+    	if (replSet[way].rrpv == MAX_RRPV) {
+                  blockIndex = way;
+                  break;
+    	}
+    }
+    // TODO here we can simply find the max rrpv and increment all with the diff
+    // from the max one to MAX_RRPV
+    // if found
+    if (blockIndex < assoc){
+      //set rrpv and replace it
+      replSet[blockIndex].rrpv = MAX_RRPV - 2;
+      return blockIndex;
+    }
+    // if not found, increment all rrpv
+    else{
+      for(UINT32 way=0; way<assoc; way++) {
+        replSet[way].rrpv ++;
+      }
+    }
+  }
+  //hopefully we don't do this
+  return -1;
+}
+
+INT32 CACHE_REPLACEMENT_STATE::Get_HPRRIP_Victim( UINT32 setIndex ) {
+  // TODO return the victim block of HP RRIP policy
+  UINT32 blockIndex = assoc;
+  LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
+  // Search for victim whose RRPV is MAX_RRPV - 1 and was accessed the earliest
+  // i.e., rrpv = MAX_RRPV - 1, index is the smallest
+  for (UINT32 i = 0; i < MAX_RRPV; i++){
+    for(UINT32 way=0; way<assoc; way++) {
+    	if (replSet[way].rrpv == MAX_RRPV) {
+                  blockIndex = way;
+                  break;
+    	}
+    }
+    // TODO here we can simply find the max rrpv and increment all with the diff
+    // from the max one to MAX_RRPV
+    // if found
+    if (blockIndex < assoc){
+      //set rrpv and replace it
+      replSet[blockIndex].rrpv = MAX_RRPV - 2;
+      return blockIndex;
+    }
+    // if not found, increment all rrpv
+    else{
+      for(UINT32 way=0; way<assoc; way++) {
+        replSet[way].rrpv ++;
+      }
+    }
+  }
+  //hopefully we don't do this
+  return -1;
+}
+
 INT32 CACHE_REPLACEMENT_STATE::Get_NRU_Victim( UINT32 setIndex ) {
-  // TODO return the victim block of NRU policy
   UINT32 blockIndex = assoc;
   LINE_REPLACEMENT_STATE *replSet = repl[ setIndex ];
   // Search for victim whose nru bit is 1 and was accessed the earliest
@@ -324,12 +392,26 @@ void CACHE_REPLACEMENT_STATE::UpdateLRU( UINT32 setIndex, INT32 updateWayID )
 
 void CACHE_REPLACEMENT_STATE::UpdateNRU( UINT32 setIndex, INT32 updateWayID,
     bool cacheHit ) {
-  // do nothing
-  // TODO update using NRU policy
   // we only do this when cache hit, since the miss case we have already dealed
   // when selecting victim block
   if (cacheHit)
     repl[setIndex][updateWayID].nru_bit = 0;
+}
+
+void CACHE_REPLACEMENT_STATE::UpdateHPRRIP( UINT32 setIndex, INT32 updateWayID,
+    bool cacheHit ) {
+  // we only do this when cache hit, since the miss case we have already dealed
+  // when selecting victim block
+  if (cacheHit)
+    repl[setIndex][updateWayID].rrpv = 0;
+}
+
+void CACHE_REPLACEMENT_STATE::UpdateFPRRIP( UINT32 setIndex, INT32 updateWayID,
+    bool cacheHit ) {
+  // we only do this when cache hit, since the miss case we have already dealed
+  // when selecting victim block
+  if (cacheHit)
+    repl[setIndex][updateWayID].rrpv = 0;
 }
 
 INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {

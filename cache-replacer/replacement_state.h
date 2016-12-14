@@ -44,6 +44,10 @@ typedef struct
     // extra state for NRU
     bool nru_bit;
 
+    // extra state for hit priority rrip
+    UINT32 rrpv;
+
+
 } LINE_REPLACEMENT_STATE;
 
 struct sampler; // Jimenez's structures
@@ -54,7 +58,9 @@ class CACHE_REPLACEMENT_STATE
 public:
     LINE_REPLACEMENT_STATE   **repl;
   private:
-
+    // here we define the bits we want to use for re ref interval
+    static UINT32 M;
+    static UINT32 MAX_RRPV;
     UINT32 numsets;
     UINT32 assoc;
     UINT32 replPolicy;
@@ -90,10 +96,12 @@ public:
     INT32  Get_My_Victim( UINT32 setIndex );
     INT32  Get_NRU_Victim( UINT32 setIndex );
     INT32  Get_HPRRIP_Victim( UINT32 setIndex );
+    INT32  Get_FPRRIP_Victim( UINT32 setIndex );
     void   UpdateLRU( UINT32 setIndex, INT32 updateWayID );
     void   UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID );
     void   UpdateNRU( UINT32 setIndex, INT32 updateWayID, bool cacheHit );
     void   UpdateHPRRIP( UINT32 setIndex, INT32 updateWayID, bool cacheHit );
+    void   UpdateFPRRIP( UINT32 setIndex, INT32 updateWayID, bool cacheHit );
 };
 
 #endif
