@@ -1,0 +1,104 @@
+%1
+@inproceedings{smith1981study,
+  title={A study of branch prediction strategies},
+  author={Smith, James E},
+  booktitle={Proceedings of the 8th annual symposium on Computer Architecture},
+  pages={135--148},
+  year={1981},
+  organization={IEEE Computer Society Press}
+}
+%2
+@article{calder1997evidence,
+  title={Evidence-based static branch prediction using machine learning},
+  author={Calder, Brad and Grunwald, Dirk and Jones, Michael and Lindsay, Donald and Martin, James and Mozer, Michael and Zorn, Benjamin},
+  journal={ACM Transactions on Programming Languages and Systems (TOPLAS)},
+  volume={19},
+  number={1},
+  pages={188--222},
+  year={1997},
+  publisher={ACM}
+}
+%3
+@article{jimenez2005idealized,
+  title={Idealized piecewise linear branch prediction},
+  author={Jim{\'e}nez, D},
+  journal={Journal of Instruction-Level Parallelism},
+  volume={7},
+  pages={1--11},
+  year={2005}
+}
+%4
+@article{block1962perceptron,
+  title={The perceptron: A model for brain functioning. i},
+  author={Block, Hans-Dieter},
+  journal={Reviews of Modern Physics},
+  volume={34},
+  number={1},
+  pages={123},
+  year={1962},
+  publisher={APS}
+}
+%5
+@inproceedings{jimenez2001dynamic,
+  title={Dynamic branch prediction with perceptrons},
+  author={Jim{\'e}nez, Daniel A and Lin, Calvin},
+  booktitle={High-Performance Computer Architecture, 2001. HPCA. The Seventh International Symposium on},
+  pages={197--206},
+  year={2001},
+  organization={IEEE}
+}
+%6
+@inproceedings{jimenez2003fast,
+  title={Fast path-based neural branch prediction},
+  author={Jim{\'e}nez, Daniel A},
+  booktitle={Microarchitecture, 2003. MICRO-36. Proceedings. 36th Annual IEEE/ACM International Symposium on},
+  pages={243--252},
+  year={2003},
+  organization={IEEE}
+}
+%7
+@inproceedings{lee1995branch,
+  title={Branch prediction strategies and branch target buffer design},
+  author={Lee, Johnny KF and Smith, Alan Jay},
+  booktitle={Instruction-level parallel processors},
+  pages={83--99},
+  year={1995},
+  organization={IEEE Computer Society Press}
+}
+%8
+@inproceedings{yeh1991two,
+  title={Two-level adaptive training branch prediction},
+  author={Yeh, Tse-Yu and Patt, Yale N},
+  booktitle={Proceedings of the 24th annual international symposium on Microarchitecture},
+  pages={51--61},
+  year={1991},
+  organization={ACM}
+}
+%9
+@article{seznec2007tage,
+  title={The l-tage predictor},
+  author={Seznec, Andr{\'e}},
+  journal={Journal of Instruction Level Parallelism},
+  volume={9},
+  year={2007}
+}
+%10
+@misc{javapathpre,
+  author={Jim{\'e}nez, Daniel A},
+  title = {{Java Fast Path-Based Neural Branch Predictor}},
+  howpublished = "\url{http://hpca23.cse.tamu.edu/taco/public-bp/index.html}",
+  year = {2008},
+  note = "[Online; accessed 19-July-2008]"
+}
+%11
+@techreport{harchol1998case,
+  title={The case for SRPT scheduling in Web servers},
+  author={Harchol-Balter, Mor and Crovella, Mark and Park, Sungsim},
+  year={1998},
+  institution={Citeseer}
+}
+%12
+%13
+%14
+%15
+
