@@ -1,0 +1,178 @@
+@inproceedings{jaleel2008adaptive,
+  title={Adaptive insertion policies for managing shared caches},
+  author={Jaleel, Aamer and Hasenplaugh, William and Qureshi, Moinuddin and Sebot, Julien and Steely Jr, Simon and Emer, Joel},
+  booktitle={Proceedings of the 17th international conference on Parallel architectures and compilation techniques},
+  pages={208--219},
+  year={2008},
+  organization={ACM}
+}
+%25
+@inproceedings{qureshi2007adaptive,
+  title={Adaptive insertion policies for high performance caching},
+  author={Qureshi, Moinuddin K and Jaleel, Aamer and Patt, Yale N and Steely, Simon C and Emer, Joel},
+  booktitle={ACM SIGARCH Computer Architecture News},
+  volume={35},
+  number={2},
+  pages={381--391},
+  year={2007},
+  organization={ACM}
+}
+@inproceedings{srinath2007feedback,
+  title={Feedback directed prefetching: Improving the performance and bandwidth-efficiency of hardware prefetchers},
+  author={Srinath, Santhosh and Mutlu, Onur and Kim, Hyesoon and Patt, Yale N},
+  booktitle={2007 IEEE 13th International Symposium on High Performance Computer Architecture},
+  pages={63--74},
+  year={2007},
+  organization={IEEE}
+}
+%30
+@inproceedings{xie2009pipp,
+  title={PIPP: promotion/insertion pseudo-partitioning of multi-core shared caches},
+  author={Xie, Yuejian and Loh, Gabriel H},
+  booktitle={ACM SIGARCH Computer Architecture News},
+  volume={37},
+  number={3},
+  pages={174--183},
+  year={2009},
+  organization={ACM}
+}
+%14
+@article{kaxiras2001cache,
+  title={Cache decay: exploiting generational behavior to reduce cache leakage power},
+  author={Kaxiras, Stefanos and Hu, Zhigang and Martonosi, Margaret},
+  journal={ACM SIGARCH Computer Architecture News},
+  volume={29},
+  number={2},
+  pages={240--251},
+  year={2001},
+  publisher={ACM}
+}
+%16
+@inproceedings{lai2001dead,
+  title={Dead-block prediction \& dead-block correlating prefetchers},
+  author={Lai, An-Chow and Fide, Cem and Falsafi, Babak},
+  booktitle={Computer Architecture, 2001. Proceedings. 28th Annual International Symposium on},
+  pages={144--154},
+  year={2001},
+  organization={IEEE}
+}
+%RRIP
+@inproceedings{jaleel2010high,
+  title={High performance cache replacement using re-reference interval prediction (RRIP)},
+  author={Jaleel, Aamer and Theobald, Kevin B and Steely Jr, Simon C and Emer, Joel},
+  booktitle={ACM SIGARCH Computer Architecture News},
+  volume={38},
+  number={3},
+  pages={60--71},
+  year={2010},
+  organization={ACM}
+}
+%17
+@article{lee2001lrfu,
+  title={LRFU: A spectrum of policies that subsumes the least recently used and least frequently used policies},
+  author={Lee, Donghee and Choi, Jongmoo and Kim, Jong-Hun and Noh, Sam H and Min, Sang Lyul and Cho, Yookun and Kim, Chong Sang},
+  journal={IEEE transactions on Computers},
+  volume={50},
+  number={12},
+  pages={1352--1361},
+  year={2001},
+  publisher={IEEE Computer Society}
+}
+%23
+@article{o1993lru,
+  title={The LRU-K page replacement algorithm for database disk buffering},
+  author={O'neil, Elizabeth J and O'neil, Patrick E and Weikum, Gerhard},
+  journal={ACM SIGMOD Record},
+  volume={22},
+  number={2},
+  pages={297--306},
+  year={1993},
+  publisher={ACM}
+}
+%27
+@book{robinson1990data,
+  title={Data cache management using frequency-based replacement},
+  author={Robinson, John T and Devarakonda, Murthy V},
+  volume={18},
+  number={1},
+  year={1990},
+  publisher={ACM}
+}
+%22
+@inproceedings{megiddo2003arc,
+  title={ARC: A Self-Tuning, Low Overhead Replacement Cache.},
+  author={Megiddo, Nimrod and Modha, Dharmendra S},
+  booktitle={FAST},
+  volume={3},
+  pages={115--130},
+  year={2003}
+}
+%5
+@inproceedings{bansal2004car,
+  title={CAR: Clock with Adaptive Replacement.},
+  author={Bansal, Sorav and Modha, Dharmendra S},
+  booktitle={FAST},
+  volume={4},
+  pages={187--200},
+  year={2004}
+}
+%29
+@inproceedings{subramanian2006adaptive,
+  title={Adaptive caches: Effective shaping of cache behavior to workloads},
+  author={Subramanian, Ranjith and Smaragdakis, Yannis and Loh, Gabriel H},
+  booktitle={Proceedings of the 39th Annual IEEE/ACM International Symposium on Microarchitecture},
+  pages={385--396},
+  year={2006},
+  organization={IEEE Computer Society}
+}
+%19
+@inproceedings{liu2008cache,
+  title={Cache bursts: A new approach for eliminating dead blocks and increasing cache efficiency},
+  author={Liu, Haiming and Ferdman, Michael and Huh, Jaehyuk and Burger, Doug},
+  booktitle={Proceedings of the 41st annual IEEE/ACM International Symposium on Microarchitecture},
+  pages={222--233},
+  year={2008},
+  organization={IEEE Computer Society}
+}
+%8
+@inproceedings{chaudhuri2009pseudo,
+  title={Pseudo-LIFO: the foundation of a new family of replacement policies for last-level caches},
+  author={Chaudhuri, Mainak},
+  booktitle={Proceedings of the 42nd Annual IEEE/ACM International Symposium on Microarchitecture},
+  pages={401--412},
+  year={2009},
+  organization={ACM}
+}
+%6
+@inproceedings{basu2007scavenger,
+  title={Scavenger: A new last level cache architecture with global block priority},
+  author={Basu, Arkaprava and Kirman, Nevin and Kirman, Meyrem and Chaudhuri, Mainak and Martinez, Jose},
+  booktitle={Proceedings of the 40th Annual IEEE/ACM International Symposium on Microarchitecture},
+  pages={421--432},
+  year={2007},
+  organization={IEEE Computer Society}
+}
+%13
+@article{johnson1994x3,
+  title={X3: A Low Overhead High Performance Buffer Management Replacement Algorithm},
+  author={Johnson, Theodore and Shasha, Dennis},
+  year={1994}
+}
+%20
+@inproceedings{loh2009extending,
+  title={Extending the effectiveness of 3D-stacked DRAM caches with an adaptive multi-queue policy},
+  author={Loh, Gabriel H},
+  booktitle={2009 42nd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)},
+  pages={201--212},
+  year={2009},
+  organization={IEEE}
+}
+%26
+@inproceedings{rajan2007emulating,
+  title={Emulating optimal replacement with a shepherd cache},
+  author={Rajan, Kaushik and Ramaswamy, Govindarajan},
+  booktitle={40th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO 2007)},
+  pages={445--454},
+  year={2007},
+  organization={IEEE}
+}
