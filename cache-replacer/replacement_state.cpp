@@ -112,7 +112,8 @@ void CACHE_REPLACEMENT_STATE::InitReplacementState()
       }
     }
     else if (replPolicy == CRC_REPL_HP_RRIP
-        || replPolicy == CRC_REPL_FP_RRIP){
+        || replPolicy == CRC_REPL_FP_RRIP
+        || replPolicy == CRC_REPL_CONTESTANT){
       // TODO init Hit Promotion RRIP variables
       for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
       {
@@ -208,7 +209,8 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
         // Contestants:  ADD YOUR UPDATE REPLACEMENT STATE FUNCTION HERE
         // Feel free to use any of the input parameters to make
         // updates to your replacement policy
-        UpdateMyPolicy(setIndex, updateWayID);
+        //UpdateMyPolicy(setIndex, updateWayID);
+        UpdateHPRRIP(setIndex, updateWayID, cacheHit);
     }
     else if ( replPolicy == CRC_REPL_HP_RRIP )
     {
@@ -389,7 +391,7 @@ void CACHE_REPLACEMENT_STATE::UpdateFPRRIP( UINT32 setIndex, INT32 updateWayID,
 
 INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
   // default return value is 0
-  return 0;
+  return Get_RRIP_Victim(setIndex);
 }
 
 void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID ) {

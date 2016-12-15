@@ -1,0 +1,29 @@
+echo "=========================================================="
+echo "=========================LRU Results======================"
+echo "=========================================================="
+# 0 for LRU, 1 for random, 3 for NRU, 4 for HP RRIP, 5 for FP RRIP
+export DAN_POLICY=$1
+./efectiu traces/400.perlbench-50B.trace.gz
+./efectiu traces/401.bzip2-226B.trace.gz
+./efectiu traces/403.gcc-16B.trace.gz
+./efectiu traces/410.bwaves-1963B.trace.gz
+./efectiu traces/416.gamess-875B.trace.gz
+./efectiu traces/434.zeusmp-10B.trace.gz
+./efectiu traces/435.gromacs-111B.trace.gz
+./efectiu traces/436.cactusADM-1804B.trace.gz
+./efectiu traces/437.leslie3d-149B.trace.gz
+./efectiu traces/444.namd-426B.trace.gz
+./efectiu traces/445.gobmk-30B.trace.gz
+./efectiu traces/447.dealII-3B.trace.gz
+./efectiu traces/453.povray-576B.trace.gz
+./efectiu traces/454.calculix-460B.trace.gz
+./efectiu traces/456.hmmer-88B.trace.gz
+./efectiu traces/458.sjeng-767B.trace.gz
+./efectiu traces/459.GemsFDTD-1491B.trace.gz
+./efectiu traces/462.libquantum-714B.trace.gz
+./efectiu traces/464.h264ref-97B.trace.gz
+./efectiu traces/465.tonto-1769B.trace.gz
+./efectiu traces/470.lbm-1274B.trace.gz
+./efectiu traces/473.astar-42B.trace.gz
+./efectiu traces/481.wrf-196B.trace.gz
+./efectiu traces/482.sphinx3-417B.trace.gz

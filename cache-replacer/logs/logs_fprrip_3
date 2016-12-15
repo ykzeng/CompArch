@@ -1,0 +1,507 @@
+==========================================================
+=========================LRU Results======================
+==========================================================
+opened "traces/400.perlbench-50B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000266, cycles = 100000266
+icount = 200901096, cycles = 200901096
+icount = 301780626, cycles = 301780626
+icount = 401780709, cycles = 401780709
+icount = 501782269, cycles = 500957555
+icount = 604098892, cycles = 565514020
+icount = 705994617, cycles = 594451248
+icount = 806707434, cycles = 623015097
+icount = 906709659, cycles = 653896838
+icount = 1006709680, cycles = 703478087
+thread 0 reached 1006709680 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 604928844 
+L3 misses: core 0: 185703 
+L3 mpki: core 0: 0.3070 
+core 0: 2.6064 IPC
+opened "traces/401.bzip2-226B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100003713, cycles = 100003713
+icount = 200003860, cycles = 200003860
+icount = 300007481, cycles = 300007481
+icount = 400007507, cycles = 400007507
+icount = 500007526, cycles = 500001977
+icount = 600007527, cycles = 529684948
+icount = 700008556, cycles = 558759298
+icount = 800017845, cycles = 587610710
+icount = 900017851, cycles = 615209099
+icount = 1000029513, cycles = 644365918
+thread 0 reached 1000029513 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600009922 
+L3 misses: core 0: 64598 
+L3 mpki: core 0: 0.1077 
+core 0: 3.5549 IPC
+opened "traces/403.gcc-16B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000000, cycles = 100000000
+icount = 200000010, cycles = 200000010
+icount = 300000032, cycles = 300000032
+icount = 400000091, cycles = 400000091
+icount = 500000157, cycles = 500000135
+icount = 600000788, cycles = 659657093
+icount = 700000806, cycles = 756231700
+icount = 800001740, cycles = 804514674
+icount = 900001863, cycles = 851494683
+icount = 1000001906, cycles = 897863148
+thread 0 reached 1000001906 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600001756 
+L3 misses: core 0: 939322 
+L3 mpki: core 0: 1.5655 
+core 0: 1.4674 IPC
+opened "traces/410.bwaves-1963B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000257, cycles = 100000257
+icount = 200000676, cycles = 200000676
+icount = 300000688, cycles = 300000688
+icount = 400001466, cycles = 400001466
+icount = 500002042, cycles = 500000577
+icount = 600003418, cycles = 531740324
+icount = 700003764, cycles = 563493688
+icount = 800004169, cycles = 593760403
+icount = 900004322, cycles = 624436713
+icount = 1000004326, cycles = 655052221
+thread 0 reached 1000004326 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600002854 
+L3 misses: core 0: 116816 
+L3 mpki: core 0: 0.1947 
+core 0: 3.3232 IPC
+opened "traces/416.gamess-875B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100009695, cycles = 100009695
+icount = 200065568, cycles = 200065568
+icount = 300083548, cycles = 300083548
+icount = 400084262, cycles = 400084262
+icount = 500090977, cycles = 500026590
+icount = 600109890, cycles = 527204537
+icount = 700115440, cycles = 554036124
+icount = 800115977, cycles = 580931065
+icount = 900118403, cycles = 607247098
+icount = 1000121765, cycles = 634493327
+thread 0 reached 1000121765 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600033137 
+L3 misses: core 0: 150 
+L3 mpki: core 0: 0.0002 
+core 0: 3.7107 IPC
+opened "traces/434.zeusmp-10B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100004032, cycles = 100004032
+icount = 200004096, cycles = 200004096
+icount = 300018717, cycles = 300018717
+icount = 400026496, cycles = 400026496
+icount = 500027359, cycles = 500010717
+icount = 600031387, cycles = 531241735
+icount = 700042522, cycles = 561960153
+icount = 800042676, cycles = 593009332
+icount = 900042712, cycles = 624014241
+icount = 1000042777, cycles = 654822275
+thread 0 reached 1000042777 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600016202 
+L3 misses: core 0: 252392 
+L3 mpki: core 0: 0.4206 
+core 0: 3.3860 IPC
+opened "traces/435.gromacs-111B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100001166, cycles = 100001166
+icount = 200003806, cycles = 200003806
+icount = 300003905, cycles = 300003905
+icount = 400008571, cycles = 400008571
+icount = 500008663, cycles = 500002506
+icount = 600009635, cycles = 527856682
+icount = 700010286, cycles = 555418002
+icount = 800010299, cycles = 583382172
+icount = 900011339, cycles = 610918078
+icount = 1000011461, cycles = 638939686
+thread 0 reached 1000011461 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600002665 
+L3 misses: core 0: 63176 
+L3 mpki: core 0: 0.1053 
+core 0: 3.5981 IPC
+opened "traces/436.cactusADM-1804B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000118, cycles = 100000118
+icount = 200000467, cycles = 200000467
+icount = 300000485, cycles = 300000485
+icount = 400002051, cycles = 400002051
+icount = 500002081, cycles = 500000861
+icount = 600002297, cycles = 553089802
+icount = 700003486, cycles = 605879529
+icount = 800003531, cycles = 659723727
+icount = 900004330, cycles = 713570956
+icount = 1000004395, cycles = 767461337
+thread 0 reached 1000004395 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600001916 
+L3 misses: core 0: 1666190 
+L3 mpki: core 0: 2.7770 
+core 0: 2.2734 IPC
+opened "traces/437.leslie3d-149B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000118, cycles = 100000118
+icount = 200000220, cycles = 200000220
+icount = 300000335, cycles = 300000335
+icount = 400000488, cycles = 400000488
+icount = 500001241, cycles = 500000549
+icount = 600001356, cycles = 530097248
+icount = 700002016, cycles = 560162018
+icount = 800002038, cycles = 592538478
+icount = 900002040, cycles = 619559268
+icount = 1000002526, cycles = 650931923
+thread 0 reached 1000002526 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 500000578 
+L3 misses: core 0: 222236 
+L3 mpki: core 0: 0.4445 
+core 0: 3.2823 IPC
+opened "traces/444.namd-426B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100043639, cycles = 100043639
+icount = 200044652, cycles = 200044652
+icount = 300104155, cycles = 300104155
+icount = 400119266, cycles = 400119266
+icount = 500126487, cycles = 500035370
+icount = 600139088, cycles = 527146033
+icount = 700142919, cycles = 554282298
+icount = 800153200, cycles = 581284280
+icount = 900168738, cycles = 611889622
+icount = 1000173262, cycles = 638748826
+thread 0 reached 1000173262 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600047810 
+L3 misses: core 0: 35438 
+L3 mpki: core 0: 0.0591 
+core 0: 3.6492 IPC
+opened "traces/445.gobmk-30B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100002414, cycles = 100002414
+icount = 200004421, cycles = 200004421
+icount = 300005246, cycles = 300005246
+icount = 400009272, cycles = 400009272
+icount = 500009638, cycles = 500004111
+icount = 600010728, cycles = 538620098
+icount = 700011604, cycles = 577242696
+icount = 800013892, cycles = 615955389
+icount = 900015426, cycles = 655059752
+icount = 1000015832, cycles = 694388022
+thread 0 reached 1000015832 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600005919 
+L3 misses: core 0: 80499 
+L3 mpki: core 0: 0.1342 
+core 0: 2.6248 IPC
+opened "traces/447.dealII-3B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100005183, cycles = 100005183
+icount = 200005237, cycles = 200005237
+icount = 300021968, cycles = 300021968
+icount = 400027918, cycles = 400027918
+icount = 500037229, cycles = 500009324
+icount = 600049933, cycles = 525284476
+icount = 700100775, cycles = 550954465
+icount = 800135622, cycles = 576236710
+icount = 900135971, cycles = 601662879
+icount = 1000141267, cycles = 627528050
+thread 0 reached 1000141267 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600105749 
+L3 misses: core 0: 6069 
+L3 mpki: core 0: 0.0101 
+core 0: 3.9166 IPC
+opened "traces/453.povray-576B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100051691, cycles = 100051691
+icount = 200346807, cycles = 200346807
+icount = 300442240, cycles = 300442240
+icount = 400587663, cycles = 400587663
+icount = 500592068, cycles = 500217257
+icount = 600592976, cycles = 536123808
+icount = 700594570, cycles = 572291152
+icount = 800596451, cycles = 607927662
+icount = 900597691, cycles = 643739038
+icount = 1000618812, cycles = 678906282
+thread 0 reached 1000618812 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600007011 
+L3 misses: core 0: 1252 
+L3 mpki: core 0: 0.0021 
+core 0: 2.8117 IPC
+opened "traces/454.calculix-460B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000147, cycles = 100000147
+icount = 200001204, cycles = 200001204
+icount = 300001218, cycles = 300001218
+icount = 400062460, cycles = 400062460
+icount = 500063644, cycles = 500017667
+icount = 600064030, cycles = 527958915
+icount = 700064044, cycles = 556704346
+icount = 800064216, cycles = 584329844
+icount = 900064475, cycles = 613116505
+icount = 1000064500, cycles = 640964619
+thread 0 reached 1000064500 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600001984 
+L3 misses: core 0: 59563 
+L3 mpki: core 0: 0.0993 
+core 0: 3.6432 IPC
+opened "traces/456.hmmer-88B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000612, cycles = 100000612
+icount = 200004103, cycles = 200004103
+icount = 300005962, cycles = 300005962
+icount = 400006170, cycles = 400006170
+icount = 500007065, cycles = 500001778
+icount = 600007661, cycles = 525149458
+icount = 700009638, cycles = 550290080
+icount = 800010822, cycles = 575430136
+icount = 900010925, cycles = 600578081
+icount = 1000010991, cycles = 625813440
+thread 0 reached 1000010991 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600004740 
+L3 misses: core 0: 920 
+L3 mpki: core 0: 0.0015 
+core 0: 3.9773 IPC
+opened "traces/458.sjeng-767B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100001987, cycles = 100001987
+icount = 200009347, cycles = 200009347
+icount = 300011360, cycles = 300011360
+icount = 400011465, cycles = 400011465
+icount = 500013658, cycles = 500004072
+icount = 600018617, cycles = 532144508
+icount = 700019394, cycles = 562389479
+icount = 800024000, cycles = 593669781
+icount = 900024217, cycles = 625270655
+icount = 1000024800, cycles = 657211690
+thread 0 reached 1000024800 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600010297 
+L3 misses: core 0: 154890 
+L3 mpki: core 0: 0.2581 
+core 0: 3.2385 IPC
+opened "traces/459.GemsFDTD-1491B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000060, cycles = 100000060
+icount = 200000601, cycles = 200000601
+icount = 300001142, cycles = 300001142
+icount = 400001158, cycles = 400001158
+icount = 500001165, cycles = 500000353
+icount = 600002076, cycles = 530979869
+icount = 700002077, cycles = 602638332
+icount = 800002096, cycles = 689733604
+icount = 900002246, cycles = 776511265
+icount = 1000002501, cycles = 859979411
+thread 0 reached 1000002501 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600001051 
+L3 misses: core 0: 1991419 
+L3 mpki: core 0: 3.3190 
+core 0: 1.6038 IPC
+opened "traces/462.libquantum-714B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000092, cycles = 100000092
+icount = 200000158, cycles = 200000158
+icount = 300000276, cycles = 300000276
+icount = 400000333, cycles = 400000333
+icount = 500000502, cycles = 500000230
+icount = 600000844, cycles = 551585376
+icount = 700000860, cycles = 603438884
+icount = 800001317, cycles = 655852716
+icount = 900001401, cycles = 709112249
+icount = 1000001430, cycles = 762311078
+thread 0 reached 1000001430 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 500000842 
+L3 misses: core 0: 56868 
+L3 mpki: core 0: 0.1137 
+core 0: 1.9139 IPC
+opened "traces/464.h264ref-97B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100003141, cycles = 100003141
+icount = 200005528, cycles = 200005528
+icount = 300007451, cycles = 300007451
+icount = 400007492, cycles = 400007492
+icount = 500011787, cycles = 500003222
+icount = 600014341, cycles = 529783764
+icount = 700014646, cycles = 559381535
+icount = 800015254, cycles = 589969922
+icount = 900015261, cycles = 619379702
+icount = 1000015770, cycles = 649016154
+thread 0 reached 1000015770 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600006500 
+L3 misses: core 0: 99441 
+L3 mpki: core 0: 0.1657 
+core 0: 3.4829 IPC
+opened "traces/465.tonto-1769B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100001389, cycles = 100001389
+icount = 200002252, cycles = 200002252
+icount = 300003863, cycles = 300003863
+icount = 400003955, cycles = 400003955
+icount = 500003994, cycles = 500001112
+icount = 600004136, cycles = 530809557
+icount = 700005575, cycles = 556604173
+icount = 800005715, cycles = 582737784
+icount = 900006032, cycles = 608964935
+icount = 1000006102, cycles = 636583284
+thread 0 reached 1000006102 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600001655 
+L3 misses: core 0: 48214 
+L3 mpki: core 0: 0.0804 
+core 0: 3.7000 IPC
+opened "traces/470.lbm-1274B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000152, cycles = 100000152
+icount = 200000231, cycles = 200000231
+icount = 300000239, cycles = 300000239
+icount = 400000521, cycles = 400000521
+icount = 500000611, cycles = 500000176
+icount = 600000619, cycles = 539714057
+icount = 700000859, cycles = 581236358
+icount = 800000882, cycles = 623029171
+icount = 900001207, cycles = 662997588
+icount = 1000001392, cycles = 702488770
+thread 0 reached 1000001392 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600000636 
+L3 misses: core 0: 2795932 
+L3 mpki: core 0: 4.6599 
+core 0: 2.5056 IPC
+opened "traces/473.astar-42B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000004, cycles = 100000004
+icount = 200000111, cycles = 200000111
+icount = 300000503, cycles = 300000503
+icount = 400000519, cycles = 400000519
+icount = 500000729, cycles = 500000234
+icount = 600000764, cycles = 557952828
+icount = 700000764, cycles = 607344925
+icount = 800001599, cycles = 653547041
+icount = 900001629, cycles = 706587276
+icount = 1000001653, cycles = 752153031
+thread 0 reached 1000001653 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 600001074 
+L3 misses: core 0: 444144 
+L3 mpki: core 0: 0.7402 
+core 0: 2.4776 IPC
+opened "traces/481.wrf-196B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000014, cycles = 100000014
+icount = 200000041, cycles = 200000041
+icount = 300000106, cycles = 300000106
+icount = 400000269, cycles = 400000269
+icount = 500001443, cycles = 500000399
+icount = 600002012, cycles = 531670054
+icount = 700002936, cycles = 564899262
+icount = 800002937, cycles = 597029449
+icount = 900003237, cycles = 628801991
+icount = 1000003243, cycles = 661935339
+thread 0 reached 1000003243 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 500001777 
+L3 misses: core 0: 247699 
+L3 mpki: core 0: 0.4954 
+core 0: 3.0980 IPC
+opened "traces/482.sphinx3-417B.trace.gz"
+LLC 4194304 bytes, 16 assoc
+icount = 100000077, cycles = 100000077
+icount = 200000090, cycles = 200000090
+icount = 300000284, cycles = 300000284
+icount = 400000588, cycles = 400000588
+icount = 500000862, cycles = 500000239
+icount = 600000900, cycles = 585087161
+icount = 700001024, cycles = 674398051
+icount = 800001039, cycles = 759480235
+icount = 900001069, cycles = 826102599
+icount = 1000158615, cycles = 891635806
+thread 0 reached 1000158615 instructions; stopping
+==========================================================
+=========== Replacement Policy Statistics ================
+==========================================================
+hostname VZENG-THINK
+L3 instructions: core 0: 599774938 
+L3 misses: core 0: 2152424 
+L3 mpki: core 0: 3.5887 
+core 0: 1.3800 IPC
